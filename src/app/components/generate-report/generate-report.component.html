@@ -1,0 +1,17 @@
+<label>Warcraft Log ID:</label>
+<input #logId value="jkzZcbQh2Car1KDF" title=""/>
+<button (click)="getReport(logId.value)">Get Report</button>
+<div *ngIf="Report" class="report">
+  <table class="deaths" *ngIf="Report.Deaths">
+    <thead>
+    <tr>
+      <td>Name</td>
+      <td>Deaths</td>
+    </tr>
+    </thead>
+    <tr  *ngFor="let characterName of getKeys(Report.Deaths)">
+      <td>{{characterName}}</td>
+      <td>{{Report.Deaths[characterName].count}}</td>
+    </tr>
+  </table>
+</div>
