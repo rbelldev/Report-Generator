@@ -11,8 +11,7 @@
       </thead>
       <tr *ngFor="let characterName of DeathReport.AllCharacterNamesWithDeaths">
         <td>{{characterName}}</td>
-        <td *ngFor="let fight of DeathReport.BaseReport.Fights">{{DeathReport.getCharacterDeathCountForFightId(characterName, fight.ID)}}
-        </td>
+        <td *ngFor="let fight of DeathReport.BaseReport.Fights">{{DeathReport.getCharacterDeathCountForFightId(characterName, fight.ID)}}</td>
         <td>{{DeathReport.getTotalCharacterDeathCount(characterName)}}</td>
       </tr>
     </table>

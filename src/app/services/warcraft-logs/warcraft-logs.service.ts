@@ -23,7 +23,7 @@ export class WarcraftLogsService {
   }
 
   getTotalDamage(logId, startTime, endTime): Observable<any> {
-    const apiUrl = `${this.BaseUrl}/report/tables/total-damage/${logId}?start=${startTime}&end=${endTime}&api_key=${this.PublicKey}`;
+    const apiUrl = `${this.BaseUrl}/report/tables/damage-done/${logId}?start=${startTime}&end=${endTime}&api_key=${this.PublicKey}`;
     return this.http.get(apiUrl);
   }
 }

@@ -7,7 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {WarcraftLogsService} from './services/warcraft-logs/warcraft-logs.service';
 import { DeathsComponent } from './components/deaths/deaths.component';
 import {DeathReportService} from './services/report-generator/DeathReport/death-report.service';
-import { TotalDamageComponent } from './components/total-damage/total-damage.component';
+import { DamageDoneComponent } from './components/total-damage/damage-done.component';
 import { TotalHealingComponent } from './components/total-healing/total-healing.component';
 import {BaseReportService} from './services/report-generator/BaseReport/base-report.service';
 
@@ -16,7 +16,7 @@ import {BaseReportService} from './services/report-generator/BaseReport/base-rep
     AppComponent,
     MainComponent,
     DeathsComponent,
-    TotalDamageComponent,
+    DamageDoneComponent,
     TotalHealingComponent
   ],
   imports: [

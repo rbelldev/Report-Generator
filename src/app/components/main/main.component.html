@@ -18,7 +18,7 @@
 </ul>
 <div class="report-wrapper">
   <deaths [ngClass]="{hidden : ActiveReport != 'Deaths'}" [GenerateDataEmitter]="GenerateDataEmitter"></deaths>
-  <total-damage [ngClass]="{hidden : ActiveReport != 'Total Damage'}" [GenerateDataEmitter]="GenerateDataEmitter"></total-damage>
-  <total-damage [ngClass]="{hidden : ActiveReport != 'Total Healing'}" [GenerateDataEmitter]="GenerateDataEmitter"></total-damage>
+  <damage-done [ngClass]="{hidden : ActiveReport != 'Total Damage'}" [GenerateDataEmitter]="GenerateDataEmitter"></damage-done>
+  <total-healing [ngClass]="{hidden : ActiveReport != 'Total Healing'}" [GenerateDataEmitter]="GenerateDataEmitter"></total-healing>
 </div>
 

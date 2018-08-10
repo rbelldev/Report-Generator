@@ -1,0 +1,21 @@
+<h4>Total Damage</h4>
+<div *ngIf="DamageDoneReport" class="report">
+  <div class="table-responsive scroll">
+    <table class="deaths table table-striped table-sm fixed">
+      <thead>
+      <tr>
+        <td></td>
+        <td *ngFor="let fight of DamageDoneReport.BaseReport.Fights">{{fight.Name}}</td>
+        <td>Total</td>
+      </tr>
+      </thead>
+
+      <tr *ngFor="let characterName of DamageDoneReport.AllCharacterNamesWithDamageDone">
+        <td>{{characterName}}</td>
+        <td *ngFor="let fight of DamageDoneReport.BaseReport.Fights">{{DamageDoneReport.getCharacterDamageForFight(characterName, fight) | number}}</td>
+        <td>{{DamageDoneReport.getTotalDamageForCharacter(characterName) | number }}</td>
+      </tr>
+
+    </table>
+  </div>
+</div>

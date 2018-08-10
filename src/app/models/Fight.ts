@@ -11,6 +11,7 @@ export class Fight {
   public Name: string;
   public Difficulty: number;
   public Deaths: object = {};
+  public DamageDone: object = {};
 
   constructor(fightData) {
     this.ID = fightData['id'];
