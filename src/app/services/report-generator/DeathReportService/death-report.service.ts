@@ -23,7 +23,6 @@ export class DeathReportService {
         });
 
         deathCollectionPromise.then(() => {
-          console.log('ready to do more');
           resolve();
         })
       });
@@ -46,7 +45,6 @@ export class DeathReportService {
   }
 
   private finalize(report: DeathReport, resolve) {
-    console.log('DeathReport', JSON.stringify(report));
     resolve(report);
   }
 }

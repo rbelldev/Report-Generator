@@ -7,7 +7,7 @@ import {DeathReport} from '../../models/reports/DeathReport';
   templateUrl: './deaths.component.html',
   styleUrls: ['./deaths.component.css']
 })
-export class DeathsComponent  implements OnInit{
+export class DeathsComponent  implements OnInit {
 
   @Input() GenerateDataEmitter: EventEmitter<string>;
   public RenderData: boolean;
@@ -17,12 +17,14 @@ export class DeathsComponent  implements OnInit{
 
   ngOnInit(): void {
     this.GenerateDataEmitter.subscribe((reportId) => {
-      this.RenderData = false;
-      this.DeathReport = new DeathReport(reportId);
-
-      this.DeathReportService.getDeathReport(this.DeathReport).then(() => {
-        this.RenderData = true
-      })
+      if(!this.DeathReport || this.DeathReport.ReportId != reportId){
+        this.RenderData = false;
+        this.DeathReport = new DeathReport(reportId);
+        this.DeathReportService.getDeathReport(this.DeathReport).then(() => {
+          console.log('New Data Received');
+          this.RenderData = true
+        })
+      }
     })
   }
 

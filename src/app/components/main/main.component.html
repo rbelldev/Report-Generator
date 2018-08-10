@@ -2,8 +2,16 @@
 
 <label>Warcraft Log ID:</label>
 <input #logId value="nyh4dMBc7LTQYHvj" title=""/>
-<button (click)="GenerateDataEmitter.emit(logId.value)">Get DeathReport</button>
+<button (click)="navigateToReport(ActiveReport, logId.value)">Get DeathReport</button>
 
-<deaths [GenerateDataEmitter]="GenerateDataEmitter"></deaths>
-
+<ul class="nav nav-pills">
+  <li *ngFor="let report of AvailableReports" class="nav-item">
+    <a class="nav-link" [ngClass]="{active : ActiveReport == report}" (click)="navigateToReport(report, logId.value)">{{report}}</a>
+  </li>
+</ul>
+<div class="report-wrapper">
+  <deaths [ngClass]="{hidden : ActiveReport != 'Deaths'}" [GenerateDataEmitter]="GenerateDataEmitter"></deaths>
+  <total-damage [ngClass]="{hidden : ActiveReport != 'Total Damage'}" [GenerateDataEmitter]="GenerateDataEmitter"></total-damage>
+  <total-damage [ngClass]="{hidden : ActiveReport != 'Total Healing'}" [GenerateDataEmitter]="GenerateDataEmitter"></total-damage>
+</div>
 

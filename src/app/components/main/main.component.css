@@ -2,20 +2,19 @@ h3 {
   margin-bottom: 30px;
 }
 
-.scroll {
-  overflow-x: scroll;
-  overflow-y: scroll;
+.hidden {
+  display: none;
 }
 
-table.fixed{
-  table-layout: fixed;
+li.nav-item {
+  cursor: pointer;
 }
 
-tr > td {
-  width: 100px;
-  text-align: center;
-}
-
-#deaths {
+.report-wrapper {
   margin-top: 30px;
+}
+
+ul.nav {
+  margin-top: 30px;
+  margin-bottom: 30px;
 }

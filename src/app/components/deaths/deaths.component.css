@@ -1,0 +1,13 @@
+.scroll {
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+table.fixed{
+  table-layout: fixed;
+}
+
+tr > td {
+  width: 100px;
+  text-align: center;
+}
