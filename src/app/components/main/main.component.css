@@ -18,3 +18,7 @@ ul.nav {
   margin-top: 30px;
   margin-bottom: 30px;
 }
+
+div.input-group {
+  width: 40%;
+}

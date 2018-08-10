@@ -6,9 +6,10 @@ import { MainComponent } from './components/main/main.component';
 import {HttpClientModule} from '@angular/common/http';
 import {WarcraftLogsService} from './services/warcraft-logs/warcraft-logs.service';
 import { DeathsComponent } from './components/deaths/deaths.component';
-import {DeathReportService} from './services/report-generator/DeathReportService/death-report.service';
+import {DeathReportService} from './services/report-generator/DeathReport/death-report.service';
 import { TotalDamageComponent } from './components/total-damage/total-damage.component';
 import { TotalHealingComponent } from './components/total-healing/total-healing.component';
+import {BaseReportService} from './services/report-generator/BaseReport/base-report.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { TotalHealingComponent } from './components/total-healing/total-healing.
     BrowserModule,
     HttpClientModule
   ],
-  providers: [WarcraftLogsService, DeathReportService],
+  providers: [WarcraftLogsService, DeathReportService, BaseReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

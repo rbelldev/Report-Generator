@@ -7,19 +7,19 @@ import {FightAnalyzer} from '../../analyzers/FightAnalyzer/FightAnalyzer';
 @Injectable({
   providedIn: 'root'
 })
-export class DeathReportService {
+export class TotalDamageReportService {
 
   constructor(private WarcraftLogsService: WarcraftLogsService) {
-    this.getMoreDeathsOrResolve = this.getMoreDeathsOrResolve.bind(this);
+    this.getMoreTotalDamageDataOrResolve = this.getMoreTotalDamageDataOrResolve.bind(this);
   }
 
-  getDeathReport(report: DeathReport): Promise<any> {
+  getTotalDamageReport(report: DeathReport): Promise<any> {
     return new Promise((resolve) => {
       this.WarcraftLogsService.getFights(report.ReportId).subscribe(fightResults => {
         FightAnalyzer.analyzeFights(report, fightResults);
 
         let deathCollectionPromise = new Promise(deathCollectionResolution => {
-          this.getDeathData(report, report.RelativeStartTime, deathCollectionResolution, this.getMoreDeathsOrResolve);
+          this.getTotalDamageData(report, report.RelativeStartTime, deathCollectionResolution, this.getMoreTotalDamageDataOrResolve);
         });
 
         deathCollectionPromise.then(() => {
@@ -29,18 +29,18 @@ export class DeathReportService {
     });
   }
 
-  getDeathData(report: DeathReport, startTime, resolve, callback) {
+  getTotalDamageData(report: DeathReport, startTime, resolve, callback) {
     this.WarcraftLogsService.getDeaths(report.ReportId, startTime, report.RelativeEndTime).subscribe(deathResults => {
       DeathAnalyzer.analyzeDeaths(report, deathResults);
       callback(report, resolve, deathResults);
     });
   }
 
-  getMoreDeathsOrResolve(report: DeathReport, resolve, deathResults) {
+  getMoreTotalDamageDataOrResolve(report: DeathReport, resolve, deathResults) {
     if (deathResults.entries.length < 200) {
       this.finalize(report, resolve);
     } else {
-      this.getDeathData(report, deathResults.entries[199]['timestamp'], resolve, this.getMoreDeathsOrResolve)
+      this.getTotalDamageData(report, deathResults.entries[199]['timestamp'], resolve, this.getMoreTotalDamageDataOrResolve)
     }
   }
 

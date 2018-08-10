@@ -1,6 +1,6 @@
 import {Fight} from '../Fight';
 
-export interface IBaseReport {
+export class BaseReport {
   GlobalStartTime: number;
   GlobalEndTime: number;
 
@@ -9,5 +9,7 @@ export interface IBaseReport {
   Title: string;
   ZoneCode: number;
 
-  Fights: Fight[];
+  Fights: Fight[] = [];
+
+  constructor(public ReportId){}
 }

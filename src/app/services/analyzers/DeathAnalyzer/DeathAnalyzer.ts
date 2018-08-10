@@ -2,9 +2,9 @@ import {DeathReport} from '../../../models/reports/DeathReport';
 import {Fight} from '../../../models/Fight';
 
 export class DeathAnalyzer {
-  public static analyzeDeaths(Report: DeathReport, deathData: object) {
-    Report.Fights.forEach((fight: Fight) => {
-      this.getDeathsForFight(Report, fight, deathData);
+  public static analyzeDeaths(deathReport: DeathReport, deathData: object) {
+    deathReport.BaseReport.Fights.forEach((fight: Fight) => {
+      this.getDeathsForFight(deathReport, fight, deathData);
     });
   }
 

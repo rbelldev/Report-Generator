@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit} from '@angular/core';
-import {DeathReportService} from '../../services/report-generator/DeathReportService/death-report.service';
+import {DeathReportService} from '../../services/report-generator/DeathReport/death-report.service';
 import {DeathReport} from '../../models/reports/DeathReport';
+import {BaseReport} from '../../models/reports/BaseReport';
 
 @Component({
   selector: 'deaths',
@@ -9,21 +10,22 @@ import {DeathReport} from '../../models/reports/DeathReport';
 })
 export class DeathsComponent  implements OnInit {
 
-  @Input() GenerateDataEmitter: EventEmitter<string>;
-  public RenderData: boolean;
+  @Input() GenerateDataEmitter: EventEmitter<BaseReport>;
   public DeathReport: DeathReport;
 
   constructor(private DeathReportService: DeathReportService) {}
 
   ngOnInit(): void {
-    this.GenerateDataEmitter.subscribe((reportId) => {
-      if(!this.DeathReport || this.DeathReport.ReportId != reportId){
-        this.RenderData = false;
-        this.DeathReport = new DeathReport(reportId);
-        this.DeathReportService.getDeathReport(this.DeathReport).then(() => {
-          console.log('New Data Received');
-          this.RenderData = true
-        })
+    this.GenerateDataEmitter.subscribe((baseReport) => {
+      if(baseReport){
+        if(!this.DeathReport || this.DeathReport.BaseReport.ReportId != baseReport.ReportId){
+          this.DeathReport = null;
+          this.DeathReportService.getDeathReport(baseReport).then((deathReport) => {
+            this.DeathReport = deathReport;
+          })
+        }
+      } else {
+        this.DeathReport = null;
       }
     })
   }

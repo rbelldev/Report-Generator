@@ -1,8 +1,15 @@
 <h3>Import Logs</h3>
 
-<label>Warcraft Log ID:</label>
-<input #logId value="nyh4dMBc7LTQYHvj" title=""/>
-<button (click)="navigateToReport(ActiveReport, logId.value)">Get DeathReport</button>
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon3">https://www.warcraftlogs.com/reports/</span>
+  </div>
+  <input #logId type="text" class="form-control" value="nyh4dMBc7LTQYHvj" title="">
+  <div class="input-group-append">
+    <button type="button" class="btn btn-primary" (click)="navigateToReport(ActiveReport, logId.value)">Generate Report</button>
+  </div>
+</div>
+
 
 <ul class="nav nav-pills">
   <li *ngFor="let report of AvailableReports" class="nav-item">
