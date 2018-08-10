@@ -1,0 +1,9 @@
+<h3>Import Logs</h3>
+
+<label>Warcraft Log ID:</label>
+<input #logId value="nyh4dMBc7LTQYHvj" title=""/>
+<button (click)="GenerateDataEmitter.emit(logId.value)">Get DeathReport</button>
+
+<deaths [GenerateDataEmitter]="GenerateDataEmitter"></deaths>
+
+

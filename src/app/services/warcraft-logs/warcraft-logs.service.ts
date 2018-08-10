@@ -17,8 +17,8 @@ export class WarcraftLogsService {
     return this.http.get(apiUrl);
   }
 
-  getDeaths(logId, endTime): Observable<any> {
-    const apiUrl = `${this.BaseUrl}/report/tables/deaths/${logId}?end=${endTime}&api_key=${this.PublicKey}`;
+  getDeaths(logId, startTime, endTime): Observable<any> {
+    const apiUrl = `${this.BaseUrl}/report/tables/deaths/${logId}?start=${startTime}&end=${endTime}&api_key=${this.PublicKey}`;
     return this.http.get(apiUrl);
   }
 }

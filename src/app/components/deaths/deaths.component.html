@@ -1,0 +1,22 @@
+<div *ngIf="RenderData" class="report">
+  <div id="deaths">
+    <h4>Deaths</h4>
+    <div class="table-responsive scroll">
+      <table class="deaths table table-striped table-sm fixed">
+        <thead>
+        <tr>
+          <td></td>
+          <td *ngFor="let fight of DeathReport.Fights">{{fight.Name}}</td>
+          <td>Total</td>
+        </tr>
+        </thead>
+        <tr *ngFor="let characterName of DeathReport.AllCharacterNamesWithDeaths">
+          <td>{{characterName}}</td>
+          <td *ngFor="let fight of DeathReport.Fights">{{DeathReport.getCharacterDeathCountForFightId(characterName,
+            fight.ID)}}</td>
+          <td>{{DeathReport.getTotalCharacterDeathCount(characterName)}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
