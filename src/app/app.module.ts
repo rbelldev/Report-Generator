@@ -11,6 +11,13 @@ import { DamageDoneComponent } from './components/total-damage/damage-done.compo
 import { TotalHealingComponent } from './components/total-healing/total-healing.component';
 import {BaseReportService} from './services/report-generator/BaseReport/base-report.service';
 import {RaidLogReportService} from './services/report-generator/raid-log-report.service';
+import { DifficultyPipe } from './pipes/difficulty.pipe';
+import { FightSummaryComponent } from './components/fight-summary/fight-summary.component';
+import { KilledPipe } from './pipes/killed.pipe';
+import {FormsModule} from '@angular/forms';
+import {NgSelectModule} from '@ng-select/ng-select';
+import { FightDurationPipe } from './pipes/fight-duration.pipe';
+import { FightPercentagePipe } from './pipes/fight-percentage.pipe';
 
 @NgModule({
   declarations: [
@@ -18,11 +25,18 @@ import {RaidLogReportService} from './services/report-generator/raid-log-report.
     MainComponent,
     DeathsComponent,
     DamageDoneComponent,
-    TotalHealingComponent
+    TotalHealingComponent,
+    DifficultyPipe,
+    FightSummaryComponent,
+    KilledPipe,
+    FightDurationPipe,
+    FightPercentagePipe
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    NgSelectModule
   ],
   providers: [WarcraftLogsService, DeathReportService, BaseReportService, RaidLogReportService],
   bootstrap: [AppComponent]

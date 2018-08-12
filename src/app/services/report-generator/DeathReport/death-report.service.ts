@@ -34,7 +34,7 @@ export class DeathReportService implements IReportService {
 
   private getDeathData(FullReport: FullReport, startTime, resolve, callback) {
     this.WarcraftLogsService.getDeaths(FullReport.RaidLogId, startTime, FullReport.BaseReport.RelativeEndTime).subscribe(deathResults => {
-      DeathAnalyzer.analyzeDeaths(FullReport.DeathReport, deathResults);
+      DeathAnalyzer.analyzeDeaths(FullReport, deathResults);
       callback(FullReport, resolve, deathResults);
     });
   }

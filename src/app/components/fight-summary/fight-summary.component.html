@@ -1,0 +1,7 @@
+<p *ngIf="SelectedFight">
+  <strong>{{SelectedFight.Name}}</strong>
+  {{(FullReport.BaseReport.GlobalStartTime + SelectedFight.StartTime) | date:'fullDate'}}
+  {{(FullReport.BaseReport.GlobalStartTime + SelectedFight.StartTime)  | date:'mediumTime'}}
+  ({{SelectedFight.Difficulty | difficulty}})
+  {{SelectedFight.Killed | killed}}
+</p>

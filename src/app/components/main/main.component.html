@@ -8,44 +8,71 @@
     </div>
     <input #logId type="text" class="form-control" value="nyh4dMBc7LTQYHvj" title="">
     <div class="input-group-append">
-      <button type="button" class="btn btn-primary" (click)="navigateToReport(ActiveReport, logId.value)">Generate
+      <button type="button" class="btn btn-primary" (click)="getReport(ActiveReport, logId.value)">Generate
         Report
       </button>
     </div>
   </div>
 
-  <div class="input-group search">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Character Name</span>
+  <div *ngIf="CurrentReport" class="search-and-filter">
+    <div class="input-group search">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Character Name</span>
+      </div>
+      <input #search type="text" class="form-control" title="">
+      <div class="input-group-append">
+        <button type="button" class="btn btn-primary">Search
+        </button>
+      </div>
     </div>
-    <input #search type="text" class="form-control" title="">
-    <div class="input-group-append">
-      <button type="button" class="btn btn-primary" [disabled]="!CurrentReport">Search
-      </button>
+
+    <div class="input-group filter">
+
+      <ng-select [items]="CurrentReport.BaseReport.Fights"
+                 [dropdownPosition]="'bottom'"
+                 [(ngModel)]="SelectedFight">
+
+        <ng-template ng-label-tmp let-item="item">
+            <strong>{{item.Name}}</strong> {{item.Difficulty | difficulty}}
+            <span [ngClass]="{'kill': item.Killed, 'wipe': !item.Killed}"> {{item.Killed | killed}} ({{item | fightDuration}}) {{item | fightPercentage}} </span>
+            <i>{{(CurrentReport.BaseReport.GlobalStartTime + item.StartTime) | date:'mediumTime'}}</i>
+        </ng-template>
+
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+          <div style="margin: 10px 0;" class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{item.Name}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{item.Difficulty | difficulty}}</h6>
+              <p class="card-text">
+                <span [ngClass]="{'kill': item.Killed, 'wipe': !item.Killed}"> {{item.Killed | killed}} ({{item | fightDuration}}) {{item | fightPercentage}} </span>
+                <i>{{(CurrentReport.BaseReport.GlobalStartTime + item.StartTime) | date:'mediumTime'}}</i>
+              </p>
+            </div>
+          </div>
+        </ng-template>
+      </ng-select>
     </div>
   </div>
+</div>
 
-  <div class="input-group filter">
-    <select class="form-control" id="exampleFormControlSelect1" title="">
-      <option>Breakdown of All Fights</option>
-      <option>Imonar</option>
-      <option>Argus</option>
-    </select>
+<div *ngIf="Loading" class="loader"></div>
+
+<div class="all-fights" [ngClass]="{hidden: SelectedFight || !CurrentReport}">
+  <ul class="nav nav-pills">
+    <li *ngFor="let report of AvailableReports" class="nav-item">
+      <a class="nav-link" [ngClass]="{active : ActiveReport == report}" (click)="ActiveReport = report">{{report}}</a>
+    </li>
+  </ul>
+
+  <div *ngIf="CurrentReport" class="report-wrapper">
+    <deaths [ngClass]="{hidden : ActiveReport != 'Deaths'}" [FullReport]="CurrentReport"></deaths>
+    <damage-done [ngClass]="{hidden : ActiveReport != 'Total Damage'}" [FullReport]="CurrentReport"></damage-done>
+    <total-healing [ngClass]="{hidden : ActiveReport != 'Total Healing'}"></total-healing>
   </div>
-
 </div>
 
-<ul class="nav nav-pills">
-  <li *ngFor="let report of AvailableReports" class="nav-item">
-    <a class="nav-link" [ngClass]="{active : ActiveReport == report}" (click)="navigateToReport(report, logId.value)">{{report}}</a>
-  </li>
-</ul>
-
-<div *ngIf="CurrentReport" class="report-wrapper">
-  <deaths [ngClass]="{hidden : ActiveReport != 'Deaths'}" [FullReport]="CurrentReport"></deaths>
-  <damage-done [ngClass]="{hidden : ActiveReport != 'Total Damage'}" [FullReport]="CurrentReport"></damage-done>
-  <total-healing [ngClass]="{hidden : ActiveReport != 'Total Healing'}"></total-healing>
+<div class="summary" *ngIf="(SelectedFight)">
+  <fight-summary [FullReport]="CurrentReport" [SelectedFight]="SelectedFight"></fight-summary>
 </div>
-
 
 

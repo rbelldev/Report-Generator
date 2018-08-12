@@ -2,7 +2,10 @@ import {Fight} from '../Fight';
 import {BaseReport} from './BaseReport';
 
 export class DeathReport {
-  public AllCharacterNamesWithDeaths: string[] = [];
+  get AllCharacterNamesWithDeaths(): string[] {
+    return this._AllCharacterNamesWithDeaths.sort();
+  }
+  private _AllCharacterNamesWithDeaths: string[] = [];
 
   constructor(private BaseReport: BaseReport) {}
 
@@ -24,9 +27,9 @@ export class DeathReport {
 
   public getAllCharacterNamesWithDeaths(searchParams) {
     if(searchParams.length > 0){
-      return this.AllCharacterNamesWithDeaths.filter( name => {name.includes(searchParams)})
+      return this._AllCharacterNamesWithDeaths.filter(name => {name.includes(searchParams)})
     } else {
-      return this.AllCharacterNamesWithDeaths;
+      return this._AllCharacterNamesWithDeaths;
     }
   }
 }

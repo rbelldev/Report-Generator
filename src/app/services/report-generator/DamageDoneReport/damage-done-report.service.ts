@@ -36,7 +36,7 @@ export class DamageDoneReportService implements IReportService {
     let currentFight = FullReport.BaseReport.Fights[fightIndex];
 
     this.WarcraftLogsService.getTotalDamage(FullReport.RaidLogId, currentFight.StartTime, currentFight.EndTime).subscribe(damageDoneResults => {
-      DamageDoneAnalyzer.analyzeDamageDone(FullReport.DamageDoneReport, damageDoneResults, fightIndex);
+      DamageDoneAnalyzer.analyzeDamageDone(FullReport, damageDoneResults, fightIndex);
       callback(FullReport, resolve, fightIndex);
     });
   }

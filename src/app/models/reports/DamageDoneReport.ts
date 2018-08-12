@@ -1,9 +1,12 @@
 import {BaseReport} from './BaseReport';
 
 export class DamageDoneReport {
+  get AllCharacterNamesWithDamageDone(): string[] {
+    return this._AllCharacterNamesWithDamageDone.sort();
+  }
 
   public DamageDone: object = {};
-  public AllCharacterNamesWithDamageDone: string[] = [];
+  private _AllCharacterNamesWithDamageDone: string[] = [];
 
   constructor(private BaseReport: BaseReport){}
 
