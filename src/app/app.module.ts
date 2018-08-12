@@ -10,6 +10,7 @@ import {DeathReportService} from './services/report-generator/DeathReport/death-
 import { DamageDoneComponent } from './components/total-damage/damage-done.component';
 import { TotalHealingComponent } from './components/total-healing/total-healing.component';
 import {BaseReportService} from './services/report-generator/BaseReport/base-report.service';
+import {RaidLogReportService} from './services/report-generator/raid-log-report.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import {BaseReportService} from './services/report-generator/BaseReport/base-rep
     BrowserModule,
     HttpClientModule
   ],
-  providers: [WarcraftLogsService, DeathReportService, BaseReportService],
+  providers: [WarcraftLogsService, DeathReportService, BaseReportService, RaidLogReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

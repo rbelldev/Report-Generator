@@ -4,7 +4,7 @@ import {BaseReport} from './BaseReport';
 export class DeathReport {
   public AllCharacterNamesWithDeaths: string[] = [];
 
-  constructor(public BaseReport: BaseReport) {}
+  constructor(private BaseReport: BaseReport) {}
 
   public getCharacterDeathCountForFightId(characterName, fightId) {
     let fight: Fight = this.BaseReport.Fights.find( fight => fight.ID == fightId);
@@ -20,7 +20,13 @@ export class DeathReport {
       }
     });
     return deathCount
+  };
+
+  public getAllCharacterNamesWithDeaths(searchParams) {
+    if(searchParams.length > 0){
+      return this.AllCharacterNamesWithDeaths.filter( name => {name.includes(searchParams)})
+    } else {
+      return this.AllCharacterNamesWithDeaths;
+    }
   }
-
-
 }

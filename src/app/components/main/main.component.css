@@ -19,6 +19,24 @@ ul.nav {
   margin-bottom: 30px;
 }
 
-div.input-group {
+div.inputs {
   width: 40%;
 }
+
+div.input-group.log-code-input {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+div.input-group.search {
+  width: 50%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+div.input-group.filter {
+  width: 50%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+

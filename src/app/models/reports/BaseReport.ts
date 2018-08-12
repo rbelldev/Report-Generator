@@ -11,5 +11,5 @@ export class BaseReport {
 
   Fights: Fight[] = [];
 
-  constructor(public ReportId){}
+  constructor(){}
 }

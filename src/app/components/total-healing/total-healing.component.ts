@@ -8,6 +8,7 @@ import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 export class TotalHealingComponent implements OnInit {
 
   @Input() GenerateDataEmitter: EventEmitter<string>;
+  @Input() CharacterSearchEmitter: EventEmitter<string>;
 
   constructor() { }
 

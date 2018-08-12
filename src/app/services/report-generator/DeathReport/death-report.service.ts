@@ -2,47 +2,49 @@ import {Injectable} from '@angular/core';
 import {DeathReport} from '../../../models/reports/DeathReport';
 import {DeathAnalyzer} from '../../analyzers/DeathAnalyzer/DeathAnalyzer';
 import {WarcraftLogsService} from '../../warcraft-logs/warcraft-logs.service';
-import {BaseReport} from '../../../models/reports/BaseReport';
+import {IReportService} from '../IReportService';
+import {FullReport} from '../../../models/reports/FullReport';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DeathReportService {
+export class DeathReportService implements IReportService {
 
   constructor(private WarcraftLogsService: WarcraftLogsService) {
     this.getMoreDeathsOrResolve = this.getMoreDeathsOrResolve.bind(this);
   }
 
-  getDeathReport(baseReport: BaseReport): Promise<DeathReport> {
-    let deathReport = new DeathReport(baseReport);
+  getReport(FullReport: FullReport): Promise<null> {
+    return this.getDeathReport(FullReport);
+  }
+
+  private getDeathReport(FullReport: FullReport): Promise<null> {
+    FullReport.DeathReport = new DeathReport(FullReport.BaseReport);
     return new Promise((resolve) => {
 
       let deathCollectionPromise = new Promise(deathCollectionResolution => {
-        this.getDeathData(deathReport, deathReport.BaseReport.RelativeStartTime, deathCollectionResolution, this.getMoreDeathsOrResolve);
+        this.getDeathData(FullReport, FullReport.BaseReport.RelativeStartTime, deathCollectionResolution, this.getMoreDeathsOrResolve);
       });
 
       deathCollectionPromise.then(() => {
-        resolve(deathReport);
+        resolve();
       });
     });
   }
 
-  getDeathData(deathReport: DeathReport, startTime, resolve, callback) {
-    this.WarcraftLogsService.getDeaths(deathReport.BaseReport.ReportId, startTime, deathReport.BaseReport.RelativeEndTime).subscribe(deathResults => {
-      DeathAnalyzer.analyzeDeaths(deathReport, deathResults);
-      callback(deathReport, resolve, deathResults);
+  private getDeathData(FullReport: FullReport, startTime, resolve, callback) {
+    this.WarcraftLogsService.getDeaths(FullReport.RaidLogId, startTime, FullReport.BaseReport.RelativeEndTime).subscribe(deathResults => {
+      DeathAnalyzer.analyzeDeaths(FullReport.DeathReport, deathResults);
+      callback(FullReport, resolve, deathResults);
     });
   }
 
-  getMoreDeathsOrResolve(deathReport: DeathReport, resolve, deathResults) {
+  private getMoreDeathsOrResolve(FullReport: FullReport, resolve, deathResults) {
     if (deathResults.entries.length < 200) {
-      this.finalize(deathReport, resolve);
+      resolve();
     } else {
-      this.getDeathData(deathReport, deathResults.entries[199]['timestamp'], resolve, this.getMoreDeathsOrResolve);
+      this.getDeathData(FullReport, deathResults.entries[199]['timestamp'], resolve, this.getMoreDeathsOrResolve);
     }
   }
 
-  private finalize(deathReport: DeathReport, resolve) {
-    resolve(deathReport);
-  }
 }

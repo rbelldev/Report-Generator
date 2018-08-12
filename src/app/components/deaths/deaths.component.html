@@ -1,18 +1,18 @@
 <h4>Deaths</h4>
-<div *ngIf="DeathReport" class="report">
+<div class="report">
   <div class="table-responsive scroll">
     <table class="deaths table table-striped table-sm fixed">
       <thead>
       <tr>
         <td></td>
-        <td *ngFor="let fight of DeathReport.BaseReport.Fights">{{fight.Name}}</td>
+        <td *ngFor="let fight of FullReport.BaseReport.Fights">{{fight.Name}}</td>
         <td>Total</td>
       </tr>
       </thead>
-      <tr *ngFor="let characterName of DeathReport.AllCharacterNamesWithDeaths">
+      <tr *ngFor="let characterName of FullReport.DeathReport.AllCharacterNamesWithDeaths">
         <td>{{characterName}}</td>
-        <td *ngFor="let fight of DeathReport.BaseReport.Fights">{{DeathReport.getCharacterDeathCountForFightId(characterName, fight.ID)}}</td>
-        <td>{{DeathReport.getTotalCharacterDeathCount(characterName)}}</td>
+        <td *ngFor="let fight of FullReport.BaseReport.Fights">{{FullReport.DeathReport.getCharacterDeathCountForFightId(characterName, fight.ID)}}</td>
+        <td>{{FullReport.DeathReport.getTotalCharacterDeathCount(characterName)}}</td>
       </tr>
     </table>
   </div>

@@ -1,24 +1,51 @@
 <h3>Import Logs</h3>
 
-<div class="input-group">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3">https://www.warcraftlogs.com/reports/</span>
-  </div>
-  <input #logId type="text" class="form-control" value="nyh4dMBc7LTQYHvj" title="">
-  <div class="input-group-append">
-    <button type="button" class="btn btn-primary" (click)="navigateToReport(ActiveReport, logId.value)">Generate Report</button>
-  </div>
-</div>
+<div class="inputs">
 
+  <div class="input-group log-code-input">
+    <div class="input-group-prepend">
+      <span class="input-group-text">warcraftlogs.com/reports/</span>
+    </div>
+    <input #logId type="text" class="form-control" value="nyh4dMBc7LTQYHvj" title="">
+    <div class="input-group-append">
+      <button type="button" class="btn btn-primary" (click)="navigateToReport(ActiveReport, logId.value)">Generate
+        Report
+      </button>
+    </div>
+  </div>
+
+  <div class="input-group search">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Character Name</span>
+    </div>
+    <input #search type="text" class="form-control" title="">
+    <div class="input-group-append">
+      <button type="button" class="btn btn-primary" [disabled]="!CurrentReport">Search
+      </button>
+    </div>
+  </div>
+
+  <div class="input-group filter">
+    <select class="form-control" id="exampleFormControlSelect1" title="">
+      <option>Breakdown of All Fights</option>
+      <option>Imonar</option>
+      <option>Argus</option>
+    </select>
+  </div>
+
+</div>
 
 <ul class="nav nav-pills">
   <li *ngFor="let report of AvailableReports" class="nav-item">
     <a class="nav-link" [ngClass]="{active : ActiveReport == report}" (click)="navigateToReport(report, logId.value)">{{report}}</a>
   </li>
 </ul>
-<div class="report-wrapper">
-  <deaths [ngClass]="{hidden : ActiveReport != 'Deaths'}" [GenerateDataEmitter]="GenerateDataEmitter"></deaths>
-  <damage-done [ngClass]="{hidden : ActiveReport != 'Total Damage'}" [GenerateDataEmitter]="GenerateDataEmitter"></damage-done>
-  <total-healing [ngClass]="{hidden : ActiveReport != 'Total Healing'}" [GenerateDataEmitter]="GenerateDataEmitter"></total-healing>
+
+<div *ngIf="CurrentReport" class="report-wrapper">
+  <deaths [ngClass]="{hidden : ActiveReport != 'Deaths'}" [FullReport]="CurrentReport"></deaths>
+  <damage-done [ngClass]="{hidden : ActiveReport != 'Total Damage'}" [FullReport]="CurrentReport"></damage-done>
+  <total-healing [ngClass]="{hidden : ActiveReport != 'Total Healing'}"></total-healing>
 </div>
+
+
 

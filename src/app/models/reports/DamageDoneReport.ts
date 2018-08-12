@@ -5,7 +5,7 @@ export class DamageDoneReport {
   public DamageDone: object = {};
   public AllCharacterNamesWithDamageDone: string[] = [];
 
-  constructor(public BaseReport: BaseReport){}
+  constructor(private BaseReport: BaseReport){}
 
   getCharacterDamageForFight(characterName, fight){
     if(fight.DamageDone[characterName]){
